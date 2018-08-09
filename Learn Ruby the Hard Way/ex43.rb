@@ -77,13 +77,53 @@ class CentralCorridor < Scene
     action = $stdin.gets.chomp
 
     if action == "shoot!"
-      puts "Quick on the draw you yank out your blaster and fire it at the Gothon."
-      puts "His clown costume is flowing and moving around his body, which throws off your aim."
-      puts "Your laser hits his costume but misses him entirely."
-      puts "This completely ruins his brand new costume his mother bought him, which makes him fly into an insane rage and blast you repeatedly in the face until you are dead."
-      puts "Then he eats you."
+      hero_health = 10
+      gorgon_health = 5
+      puts "You pull out a gun and start shooting at the Gorgon."
+      puts "The Gorgon shoots back."
 
-      'death' # return next scene
+      while gorgon_health > 0 && hero_health > 0
+        hit = rand(0..1)
+        puts "The Gorgon's health is #{gorgon_health}."
+        puts "Your health is #{hero_health}."
+
+        if hit < 1
+          puts "You missed!"
+          puts "The Gorgon shoot's back and does one damage"
+          hero_health -= 1
+
+          puts "Shoot again?"
+          print "> "
+
+          continue = $stdin.gets.chomp
+
+          if !continue.include?("y")
+            return 'death'
+          end
+
+        else
+          puts "Right on target!"
+          puts "You did some serious damage."
+          gorgon_health -= 2
+
+          puts "Shoot again?"
+          print "> "
+
+          continue = $stdin.gets.chomp
+
+          if !continue.include?("y")
+            return 'death'
+          end
+        end
+      end
+
+      if !hero_health
+        'death' # return next scene
+      else
+        puts "Phew, that was close."
+        'laser_weapon_armory'
+      end
+
 
     elsif action == "dodge!"
       puts "Like a world class boxer you dodge, weave, slip and slide right as the Gothon's blaster cranks a laser past your head."
