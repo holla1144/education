@@ -59,3 +59,7 @@
 # - Have stamina/life
 # - Can loose stamina/life
 
+require_relative 'engine'
+
+game = Engine.new('bedroom')
+game.play()

@@ -19,6 +19,3 @@ class Engine
     current_scene.play() # play the last scene after the while loop terminates
   end
 end
-
-game = Engine.new('failure')
-game.play()
