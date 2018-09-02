@@ -1,4 +1,3 @@
-require_relative './sentence_class'
 require_relative './lexicon'
 
 module Parser
@@ -25,20 +24,20 @@ module Parser
 		attr_reader :object
 	end
 
-	def peek(word_list)
+	def self.peek(word_list)
 		if word_list
 			word = word_list[0]
-			word
+			word[0]
 		else 
 			nil
 		end
 	end
 
-	def match(word_list, expecting)
+	def self.match(word_list, expecting)
 		if word_list
 			word = word_list.shift
 
-			if word_list[0] == expecting
+			if word[0] == expecting
 				word
 			else
 				nil
@@ -48,33 +47,59 @@ module Parser
 		end
 	end
 
-	def skip(word_list, word_type)
+	def self.skip(word_list, word_type)
 		while peek(word_list) == word_type
 			match(word_list, word_type)
 		end
 	end
 
-	def parse_verb(word_list)
+	def self.parse_verb(word_list)
 		skip(word_list, 'stop')
 
-		if peek(word_list == 'verb')
+		if peek(word_list) == 'verb'
 			match(word_list, 'verb')
 		else 
 			raise ParserError.new('Expected a verb next.')
 		end
 	end
 
-	def parse_object(word_list)
+	def self.parse_object(word_list)
 		skip(word_list, 'stop')
 		next_word = peek(word_list)
 
 		if next_word == 'noun'
 			match(word_list, 'noun')
 		elsif next_word == 'direction'
-			match(next_word, 'direction')
+			match(word_list, 'direction')
 		else 
 			raise ParserError.new('Expected a noun or a direction next')
 		end
 	end
 
+	def self.parse_subject(word_list)
+		skip(word_list, 'stop')
+		next_word = peek(word_list)
+
+		print next_word == 'verb'
+
+		if next_word == 'noun'
+			match(word_list, 'noun')
+		elsif next_word == 'verb'
+			['noun', 'player']
+		else
+			raise ParserError.new("Expected a verb next.")
+		end
+	end
+
+	def self.parse_sentence(word_list)
+		subj = parse_subject(word_list)
+		verb = parse_verb(word_list)
+		obj = parse_object(word_list)
+
+		print subj
+		print verb
+		print obj
+
+		Sentence.new(subj, verb, obj)
+	end
 end
