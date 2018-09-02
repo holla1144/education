@@ -1,0 +1,10 @@
+# the Rakefile's job is to automate common tasks for us
+# this includes stuff like testing
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs << "tests"
+  t.test_files = FileList['tests/test*.rb']
+  t.verbose = true
+end
