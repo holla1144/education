@@ -1,3 +1,6 @@
 [submodule "toy_app"]
 	path = toy_app
 	url = https://github.com/holla1144/toy_app
+[submodule "basic_user_creation"]
+	path = basic_user_creation
+	url = https://github.com/holla1144/basic_user_creation
