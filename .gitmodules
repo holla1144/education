@@ -4,3 +4,6 @@
 [submodule "basic_user_creation"]
 	path = basic_user_creation
 	url = https://github.com/holla1144/basic_user_creation
+[submodule "sample_rails_app"]
+	path = sample_rails_app
+	url = https://github.com/holla1144/sample_rails_app.git
