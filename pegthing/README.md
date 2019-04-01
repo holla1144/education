@@ -1,4 +1,4 @@
-# fwpd
+# pegthing
 
 FIXME: description
 
@@ -10,7 +10,7 @@ Download from http://example.com/FIXME.
 
 FIXME: explanation
 
-    $ java -jar fwpd-0.1.0-standalone.jar [args]
+    $ java -jar pegthing-0.1.0-standalone.jar [args]
 
 ## Options
 

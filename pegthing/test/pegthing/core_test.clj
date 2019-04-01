@@ -1,6 +1,6 @@
-(ns fwpd.core-test
+(ns pegthing.core-test
   (:require [clojure.test :refer :all]
-            [fwpd.core :refer :all]))
+            [pegthing.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
